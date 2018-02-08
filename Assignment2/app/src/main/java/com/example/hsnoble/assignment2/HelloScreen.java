@@ -1,16 +1,34 @@
 package com.example.hsnoble.assignment2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class HelloScreen extends AppCompatActivity {
 
+    public void goHome()
+    {
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello_screen);
+
+        //Home Button
+        final Button home = findViewById(R.id.Home);
+        home.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view) {
+                //Go to home
+                goHome();
+            }
+        });
+
         Bundle b = getIntent().getExtras();
         //Standard
         final TextView  datType = findViewById(R.id.DatTypeSpace);
