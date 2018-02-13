@@ -63,14 +63,14 @@
         android:text="Hello"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintEnd_toStartOf="@+id/seneca"
         app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintStart_toEndOf="@+id/World"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <RadioGroup
-        android:id="@+id/hi_radio"
+        android:id="@+id/hi_radioGroup"
         android:layout_width="116dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -110,7 +110,7 @@
     </RadioGroup>
 
     <RadioGroup
-        android:id="@+id/hello_radio"
+        android:id="@+id/hello_radioGroup"
         android:layout_width="114dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -149,7 +149,7 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/seneca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -166,16 +166,29 @@
         android:id="@+id/say_hi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Say Hi"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="231dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/say_hello"
+        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
 
     <Button
         android:id="@+id/say_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="8dp"
         android:text="Say Hello"
-        tools:layout_editor_absoluteX="226dp"
-        tools:layout_editor_absoluteY="231dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
 
 </android.support.constraint.ConstraintLayout>
