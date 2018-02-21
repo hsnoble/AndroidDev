@@ -22,6 +22,9 @@ public class QuizActivity extends AppCompatActivity {
     private Button mCheatButton;
     private TextView mQuestionTextView;
 
+    //points and other data
+    private int point = 0;
+
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_australia, true),
             new Question(R.string.question_oceans, true),
@@ -33,12 +36,18 @@ public class QuizActivity extends AppCompatActivity {
 
     private int mCurrentIndex = 0;
     private boolean mIsCheater;
+    //Cheater bank - an array of booleans that determine which question the user cheated on
+    private int sz = mQuestionBank.length;
+    private boolean [] cheaterBank = new boolean [sz];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
+
+        //initialize cheat bank array
+        for(int x = 0; x < sz; x++) {cheaterBank[x] = false;}
 
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
@@ -77,6 +86,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                //open cheat window
                 Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
                 startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
@@ -95,7 +105,10 @@ public class QuizActivity extends AppCompatActivity {
             if (data == null) {
                 return;
             }
+            //get boolean
             mIsCheater = CheatActivity.wasAnswerShown(data);
+            //cheater bank add
+            cheaterBank[mCurrentIndex] = true;
         }
     }
 
@@ -146,6 +159,9 @@ public class QuizActivity extends AppCompatActivity {
 
         int messageResId = 0;
 
+        //get info from cheat bank
+        mIsCheater = cheaterBank[mCurrentIndex];
+        //check cheater
         if (mIsCheater) {
             messageResId = R.string.judgment_toast;
         } else {
