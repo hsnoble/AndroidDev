@@ -22,6 +22,11 @@ public class QuizActivity extends AppCompatActivity {
     private Button mCheatButton;
     private TextView mQuestionTextView;
 
+    //Added
+    private TextView score;
+    private TextView questions_complete;
+    private Button hint;
+
     //points and other data
     private int point = 0;
 
@@ -39,6 +44,10 @@ public class QuizActivity extends AppCompatActivity {
     //Cheater bank - an array of booleans that determine which question the user cheated on
     private int sz = mQuestionBank.length;
     private boolean [] cheaterBank = new boolean [sz];
+    private boolean [] completedQuestions = new boolean [sz];
+    private int questionCompleteCount;
+    //hint
+    private boolean mHint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +56,12 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         //initialize cheat bank array
-        for(int x = 0; x < sz; x++) {cheaterBank[x] = false;}
+        for(int x = 0; x < sz; x++)
+        {
+            cheaterBank[x] = false;
+            completedQuestions[x] = false;
+        }
+        questionCompleteCount = 0;
 
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
@@ -91,6 +105,10 @@ public class QuizActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
         });
+
+        //Score and progress
+        score = (TextView) findViewById(R.id.score);
+        questions_complete = (TextView) findViewById(R.id.q_completed);
 
         updateQuestion();
     }
@@ -154,24 +172,47 @@ public class QuizActivity extends AppCompatActivity {
         mQuestionTextView.setText(question);
     }
 
+    private boolean questionCompleted(int questionIndex)
+    {
+        return completedQuestions[questionIndex];
+    }
+    private void setQuestionCompleted(int questionIndex)
+    {
+        completedQuestions[questionIndex] = true;
+        questionCompleteCount++;
+    }
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
 
         int messageResId = 0;
-
+        boolean qComplete = questionCompleted(mCurrentIndex);
         //get info from cheat bank
-        mIsCheater = cheaterBank[mCurrentIndex];
-        //check cheater
-        if (mIsCheater) {
-            messageResId = R.string.judgment_toast;
-        } else {
-            if (userPressedTrue == answerIsTrue) {
-                messageResId = R.string.correct_toast;
+        if(!qComplete) {
+            mIsCheater = cheaterBank[mCurrentIndex];
+            //check if question has been completed
+            //check cheater
+            if (mIsCheater) {
+                messageResId = R.string.judgment_toast;
+            } else if (mHint) {
+                point++;
             } else {
-                messageResId = R.string.incorrect_toast;
+                if (userPressedTrue == answerIsTrue) {
+                    messageResId = R.string.correct_toast;
+                    point += 2;
+                } else {
+                    messageResId = R.string.incorrect_toast;
+                    point--;
+                }
+                //Add score
+                score.setText(Integer.toString(point));
             }
+            setQuestionCompleted(mCurrentIndex);
+            questions_complete.setText(Integer.toString(questionCompleteCount));
         }
-
+        else
+        {
+            messageResId = R.string.question_completed;
+        }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
                 .show();
     }
