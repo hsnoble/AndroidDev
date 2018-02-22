@@ -23,4 +23,12 @@
     <string name="cheat_button">Cheat!</string>
     <string name="judgment_toast">Cheating is wrong.</string>
     <string name="question_completed">Question has been completed!</string>
+
+    <string name="warning_text_hint">Are you sure you want a hint?</string>
+    <string name="hint_australia">A resident of Canberra is known as a Canberran.</string>
+    <string name="hint_oceans">There are more fish in the pacific ocean</string>
+    <string name="hint_mideast">The Suez Canal Connects two seas.</string>
+    <string name="hint_africa">Ask Omar for the answer</string>
+    <string name="hint_americas">You can buy many books on the amazon website</string>
+    <string name="hint_asia">Lake Ontario is one of the five Great Lakes</string>
 </resources>

@@ -15,11 +15,16 @@ public class QuizActivity extends AppCompatActivity {
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
     private static final int REQUEST_CODE_CHEAT = 0;
+    private static final int REQUEST_CODE_HINT = 1;
 
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
     private Button mCheatButton;
+    //NEW
+    private Button mPrevButton;
+    private Button mHintButton;
+
     private TextView mQuestionTextView;
 
     //Added
@@ -91,6 +96,20 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 mIsCheater = false;
+                mHint = false;
+                updateQuestion();
+            }
+        });
+
+        //Prev button
+        mPrevButton = (Button) findViewById(R.id.prev);
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //reverse wrap around
+                mCurrentIndex = ((mCurrentIndex - 1) + mQuestionBank.length) % mQuestionBank.length;
+                mIsCheater = false;
+                mHint = false;
                 updateQuestion();
             }
         });
@@ -103,6 +122,17 @@ public class QuizActivity extends AppCompatActivity {
                 //open cheat window
                 Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
                 startActivityForResult(intent, REQUEST_CODE_CHEAT);
+            }
+        });
+
+        //hint button
+        mHintButton = (Button) findViewById(R.id.hint);
+        mHintButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open hint window
+                Intent intent = HintActivity.newIntent(QuizActivity.this, mCurrentIndex);
+                startActivityForResult(intent, REQUEST_CODE_HINT);
             }
         });
 
@@ -125,8 +155,18 @@ public class QuizActivity extends AppCompatActivity {
             }
             //get boolean
             mIsCheater = CheatActivity.wasAnswerShown(data);
-            //cheater bank add
-            cheaterBank[mCurrentIndex] = true;
+            if(mIsCheater)
+            {
+                //cheater bank add
+                cheaterBank[mCurrentIndex] = true;
+            }
+        }
+        if(requestCode == REQUEST_CODE_HINT){
+            if (data == null) {
+                return;
+            }
+            //get boolean
+            mHint = HintActivity.wasHintShown(data);
         }
     }
 
@@ -194,7 +234,10 @@ public class QuizActivity extends AppCompatActivity {
             if (mIsCheater) {
                 messageResId = R.string.judgment_toast;
             } else if (mHint) {
+                messageResId = R.string.correct_toast_hint;
                 point++;
+                //Add score
+                score.setText(Integer.toString(point));
             } else {
                 if (userPressedTrue == answerIsTrue) {
                     messageResId = R.string.correct_toast;
