@@ -56,7 +56,12 @@ public class HintActivity extends AppCompatActivity {
                 setHintShown(true);
             }
         });
-
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); //FINSIH EXITS THE ACTIVITY
+            }
+        });
 
 
 
