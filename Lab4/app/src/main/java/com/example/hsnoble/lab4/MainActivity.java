@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             col1View[x].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36);
             col1View[x].setPadding(100,10,100,10);
             col1View[x].setBackgroundColor(Color.YELLOW);
+            col1View[x].setTextColor(Color.RED);
             col1View[x].setText(Character.toString(letterCol1[x]));
             col1View[x].setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             col1.addView(col1View[x]);
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             col2View[x].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36);
             col2View[x].setPadding(100,10,100,10);
             col2View[x].setBackgroundColor(Color.RED);
+            col2View[x].setTextColor(Color.YELLOW);
             col2View[x].setText(Character.toString(letterCol2[x]));
             col2View[x].setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             col2.addView(col2View[x]);
