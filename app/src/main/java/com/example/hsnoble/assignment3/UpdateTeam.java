@@ -3,15 +3,11 @@ package com.example.hsnoble.assignment3;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class AddTeam extends AppCompatActivity {
+public class UpdateTeam extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_team);
-    }
-    public void submitToDB ()
-    {
-
+        setContentView(R.layout.activity_update_team);
     }
 }
