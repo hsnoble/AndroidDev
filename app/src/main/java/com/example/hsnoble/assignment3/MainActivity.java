@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         Team t;
         t = db.find(PK);
         Intent i = new Intent(MainActivity.this, UpdateTeam.class);
+        i.putExtra("PK", PK);
         i.putExtra("AUTHOR", t.getAuthorName());
         i.putExtra("TEAM_NAME", t.getTeamName());
         i.putExtra("CITY", t.getCity());

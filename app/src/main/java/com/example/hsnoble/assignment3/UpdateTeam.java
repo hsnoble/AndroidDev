@@ -44,6 +44,10 @@ public class UpdateTeam extends AppCompatActivity {
         mvp = (String)team.get("MVP");
         stadium = (String)team.get("STADIUM");
 
+        final int pk = (Integer) team.get("PK");
+
+        System.out.println("PK: " + pk);
+
         //Set Texts
         cityText.setText(city);
         teamNameText.setText(teamName);
@@ -51,8 +55,8 @@ public class UpdateTeam extends AppCompatActivity {
         mvpText.setText(mvp);
         stadiumText.setText(stadium);
 
-        Button update = (Button) findViewById(R.id.update);
-        exit.setOnClickListener(new View.OnClickListener() {
+        final Button update = (Button) findViewById(R.id.update);
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //get Edit Texts
@@ -63,14 +67,13 @@ public class UpdateTeam extends AppCompatActivity {
                 String loc = stadiumText.getText().toString();
                 //Create a team object for submit
                 Team t = new Team(author, team, c, sp, mvp_obj, loc);
+                update(pk, t);
             }
         });
 
     }
-    public void update()
+    public void update(int pk, Team t)
     {
-
-
-
+        db.update(pk, t);
     }
 }

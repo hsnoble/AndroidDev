@@ -125,7 +125,7 @@ public class DBHandler extends SQLiteOpenHelper
 
         return t;
     }
-    public void update(int pk, Team t)
+    public int update(int pk, Team t)
     {
         db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -136,9 +136,11 @@ public class DBHandler extends SQLiteOpenHelper
         cv.put(STADIUM, t.getStadium());
 
         String sel = PK + "= ?";
-        String[] arg = {Integer.toString(pk)}
+        String[] arg = {Integer.toString(pk)};
         //String where =
         int count = db.update(TABLE_TEAM_DETAIL, cv, sel, arg);
+        System.out.println("UPDATED: " + count);
+        return count;
     }
 /*
     public void deleteAll ()
