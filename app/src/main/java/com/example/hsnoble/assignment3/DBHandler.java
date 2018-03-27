@@ -125,6 +125,21 @@ public class DBHandler extends SQLiteOpenHelper
 
         return t;
     }
+    public void update(int pk, Team t)
+    {
+        db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(CITY, t.getCity());
+        cv.put(TEAM_NAME, t.getTeamName());
+        cv.put(SPORT, t.getSport());
+        cv.put(MVP, t.getMvp());
+        cv.put(STADIUM, t.getStadium());
+
+        String sel = PK + "= ?";
+        String[] arg = {Integer.toString(pk)}
+        //String where =
+        int count = db.update(TABLE_TEAM_DETAIL, cv, sel, arg);
+    }
 /*
     public void deleteAll ()
     {

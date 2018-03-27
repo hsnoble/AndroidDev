@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 public class UpdateTeam extends AppCompatActivity {
 
+    private DBHandler db = new DBHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,8 @@ public class UpdateTeam extends AppCompatActivity {
     }
     public void update()
     {
+
+
 
     }
 }
