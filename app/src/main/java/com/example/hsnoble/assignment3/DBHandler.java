@@ -96,7 +96,33 @@ public class DBHandler extends SQLiteOpenHelper
     {
         db = this.getReadableDatabase();
         Team t = new Team();
+        String[] val = {Integer.toString(pk)};
+        String sel = PK + "= ?";
         //Query here
+        Cursor c = db.query(TABLE_TEAM_DETAIL, null, sel, val, null,null, PK);
+        while(c.moveToNext()) {
+            String author = c.getString(
+                    c.getColumnIndexOrThrow(AUTHOR));
+            String team_name = c.getString(
+                    c.getColumnIndexOrThrow(TEAM_NAME));
+            String mvp = c.getString(
+                    c.getColumnIndexOrThrow(MVP));
+            String stadium = c.getString(
+                    c.getColumnIndexOrThrow(STADIUM));
+            String city = c.getString(
+                    c.getColumnIndexOrThrow(CITY));
+            String sport = c.getString(
+                    c.getColumnIndexOrThrow(SPORT));
+            int id = c.getInt(c.getColumnIndexOrThrow(PK));
+            //setters
+            t.setAuthorName(author);
+            t.setTeamName(team_name);
+            t.setCity(city);
+            t.setSport(sport);
+            t.setMvp(mvp);
+            t.setStadium(stadium);
+        }
+
         return t;
     }
 /*

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class UpdateTeam extends AppCompatActivity {
 
@@ -20,5 +21,52 @@ public class UpdateTeam extends AppCompatActivity {
                 System.exit(0);
             }
         });
+
+
+        //Initializing EditTexts
+        final EditText cityText, teamNameText, sportText, mvpText, stadiumText;
+        cityText = findViewById(R.id.city);
+        teamNameText = findViewById(R.id.teamName);
+        sportText = findViewById(R.id.sport);
+        mvpText = findViewById(R.id.mvp);
+        stadiumText = findViewById(R.id.stadium);
+
+        //GETTING EXTRAS
+        Bundle team = getIntent().getExtras();
+        String teamName, city, sport, mvp, stadium;
+        final String author;
+        author = (String)team.get("AUTHOR");
+        teamName = (String)team.get("TEAM_NAME");
+        city = (String)team.get("CITY");
+        sport = (String)team.get("TEAM_NAME");
+        mvp = (String)team.get("MVP");
+        stadium = (String)team.get("STADIUM");
+
+        //Set Texts
+        cityText.setText(city);
+        teamNameText.setText(teamName);
+        sportText.setText(sport);
+        mvpText.setText(mvp);
+        stadiumText.setText(stadium);
+
+        Button update = (Button) findViewById(R.id.update);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //get Edit Texts
+                String c = cityText.getText().toString();
+                String team = teamNameText.getText().toString();
+                String sp = sportText.getText().toString();
+                String mvp_obj = mvpText.getText().toString();
+                String loc = stadiumText.getText().toString();
+                //Create a team object for submit
+                Team t = new Team(author, team, c, sp, mvp_obj, loc);
+            }
+        });
+
+    }
+    public void update()
+    {
+
     }
 }

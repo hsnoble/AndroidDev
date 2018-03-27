@@ -56,19 +56,31 @@ public class MainActivity extends AppCompatActivity {
             teamButtons[x].setText(teamNameList.get(x).toString());
             teamButtons[x].setBackgroundColor(Color.RED);
             teamButtons[x].setTextSize(18);
-            final int idxFinal = x;
+            teams.addView(teamButtons[x]);
+        }
+        for(int x= 0; x < teamButtons.length; x++)
+        {
+            final int idxFinal = (Integer) PKPackage.get(x);
             //Make the button go to the updata page with fields already filled up
             teamButtons[x].setOnClickListener(new View.OnClickListener(){
                 public void onClick (View view) {
                     updatePage(idxFinal);
                 }
             });
-            teams.addView(teamButtons[x]);
         }
     }
     //Goes to the update activity with the profile already queried
     public void updatePage(int PK)
     {
-
+        Team t;
+        t = db.find(PK);
+        Intent i = new Intent(MainActivity.this, UpdateTeam.class);
+        i.putExtra("AUTHOR", t.getAuthorName());
+        i.putExtra("TEAM_NAME", t.getTeamName());
+        i.putExtra("CITY", t.getCity());
+        i.putExtra("SPORT", t.getSport());
+        i.putExtra("MVP", t.getMvp());
+        i.putExtra("STADIUM", t.getStadium());
+        startActivity(i);
     }
 }
