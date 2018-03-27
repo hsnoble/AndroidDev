@@ -1,5 +1,6 @@
 package com.example.hsnoble.assignment3;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,6 +48,10 @@ public class AddTeam extends AppCompatActivity {
                 //Create a team object
                 Team t = new Team(author, team, cty, sp, mvp_str, st);
                 db.insert(t);
+                db.viewAll();
+                //Open Main menu
+                Intent i = new Intent(AddTeam.this, MainActivity.class);
+                startActivity(i);
             }
         });
 
