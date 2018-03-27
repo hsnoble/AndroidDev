@@ -43,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout teams = (LinearLayout) findViewById(R.id.teams);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.bottomMargin = 10;
-        List teamNameList = db.viewAll();
+        List[] DBpackage = db.viewAll();
+
+        List teamNameList = DBpackage[0];
+        List PKPackage = DBpackage[1];
+
         Button[] teamButtons = new Button[teamNameList.size()];
         for(int x = 0; x < teamNameList.size(); x++)
         {
@@ -52,7 +56,19 @@ public class MainActivity extends AppCompatActivity {
             teamButtons[x].setText(teamNameList.get(x).toString());
             teamButtons[x].setBackgroundColor(Color.RED);
             teamButtons[x].setTextSize(18);
+            final int idxFinal = x;
+            //Make the button go to the updata page with fields already filled up
+            teamButtons[x].setOnClickListener(new View.OnClickListener(){
+                public void onClick (View view) {
+                    updatePage(idxFinal);
+                }
+            });
             teams.addView(teamButtons[x]);
         }
+    }
+    //Goes to the update activity with the profile already queried
+    public void updatePage(int PK)
+    {
+
     }
 }

@@ -69,22 +69,35 @@ public class DBHandler extends SQLiteOpenHelper
         db.execSQL(q);
         this.onCreate(db);
     }
-    public List viewAll ()
+    public List[] viewAll ()
     {
         db = this.getReadableDatabase();
-        String[] cols = {CITY};
+        List[] dataPackage = new List[2];
+        String[] cols = {PK, CITY};
         Cursor c = db.query(TABLE_TEAM_DETAIL, cols, null, null, null,null, PK);
         List list = new ArrayList<>();
+        List PKList = new ArrayList<>();
         while(c.moveToNext()) {
             String city = c.getString(
                     c.getColumnIndexOrThrow(CITY));
+            int id = c.getInt(c.getColumnIndexOrThrow(PK));
+            PKList.add(id);
             list.add(city);
         }
         c.close();
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
-        return list;
+        dataPackage[0] = list;
+        dataPackage[1] = PKList;
+        return dataPackage;
+    }
+    public Team find(int pk)
+    {
+        db = this.getReadableDatabase();
+        Team t = new Team();
+        //Query here
+        return t;
     }
 /*
     public void deleteAll ()
