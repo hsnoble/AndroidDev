@@ -33,7 +33,7 @@ public class DBHandler extends SQLiteOpenHelper
     {
         String CREATE_TEAM_TABLE = "CREATE TABLE " + TABLE_STUDENT_DETAIL + "("
                 + PK + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + AUTHOR + "TEXT,"
+                + AUTHOR + " TEXT, "
                 + TEAM_NAME + " TEXT, "
                 + CITY + " TEXT NOT NULL, "
                 + SPORT  + " TEXT, "
@@ -54,6 +54,10 @@ public class DBHandler extends SQLiteOpenHelper
         v.put(SPORT, t.getSport());
         v.put(MVP, t.getMvp());
         v.put(STADIUM, t.getStadium());
+
+        long num = db.insert(TABLE_STUDENT_DETAIL, null, v);
+        System.out.println("ENTRY IS " + num);
+        db.close();
     }
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion)
     {

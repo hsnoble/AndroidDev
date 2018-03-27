@@ -1,9 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hsnoble.assignment3.UpdateTeam">
+    tools:context="com.example.hsnoble.assignment3.UpdateTeam"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="374dp"
+        android:background="#ffff00"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name: Stephen Noble"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="City:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/teamName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text|textPersonName"
+            android:text="Name:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/sport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text|textPersonName"
+            android:text="Sport:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/mvp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text|textPersonName"
+            android:text="MVP"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/stadium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text|textPersonName"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:text="Stadium:"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0000ff"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="340dp"
+            android:layout_height="65dp"
+            android:background="#0000ff"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <Button
+                android:id="@+id/update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000ff"
+                android:text="update"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="63dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000ff"
+                android:text="delete"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/exit_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000ff"
+                android:text="EXIT"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</android.widget.LinearLayout>
