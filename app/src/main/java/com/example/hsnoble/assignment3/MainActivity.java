@@ -39,16 +39,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //List of teams
+        //List of teams Object to put all buttons in
         LinearLayout teams = (LinearLayout) findViewById(R.id.teams);
+        //Layout of buttons
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.bottomMargin = 10;
+
+        //Package List containing team names and PKs
         List[] DBpackage = db.viewAll();
 
+        //List of team names and Primary keys
         List teamNameList = DBpackage[0];
         List PKPackage = DBpackage[1];
 
+        //Button array
         Button[] teamButtons = new Button[teamNameList.size()];
+        //Creating buttons that will depend on the entries on the database
         for(int x = 0; x < teamNameList.size(); x++)
         {
             teamButtons[x] = new Button(getApplicationContext());
@@ -58,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             teamButtons[x].setTextSize(18);
             teams.addView(teamButtons[x]);
         }
+        //Adds functionality to buttons
         for(int x= 0; x < teamButtons.length; x++)
         {
             final int idxFinal = (Integer) PKPackage.get(x);
@@ -72,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     //Goes to the update activity with the profile already queried
     public void updatePage(int PK)
     {
+        //Prepares data for a database update
         Team t;
         t = db.find(PK);
         Intent i = new Intent(MainActivity.this, UpdateTeam.class);

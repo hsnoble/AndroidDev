@@ -47,6 +47,7 @@ public class DBHandler extends SQLiteOpenHelper
         db.execSQL(CREATE_TEAM_TABLE);
         this.db = db;
     }
+    //inserts data to database
     public void insert(Team t)
     {
         db = this.getWritableDatabase();
@@ -63,12 +64,14 @@ public class DBHandler extends SQLiteOpenHelper
         System.out.println("ENTRY IS " + num);
         db.close();
     }
+    //Required to implement
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion)
     {
         String q = "DROP TABLE IF EXISTS " + TABLE_TEAM_DETAIL;
         db.execSQL(q);
         this.onCreate(db);
     }
+    //Views all entries. Returns a list of team names and Primary key
     public List[] viewAll ()
     {
         db = this.getReadableDatabase();
@@ -92,6 +95,7 @@ public class DBHandler extends SQLiteOpenHelper
         dataPackage[1] = PKList;
         return dataPackage;
     }
+    //Finds a matching team. Returns a Team object
     public Team find(int pk)
     {
         db = this.getReadableDatabase();
@@ -125,6 +129,7 @@ public class DBHandler extends SQLiteOpenHelper
 
         return t;
     }
+    //Updates a row. Returns the amount of rows updated
     public int update(int pk, Team t)
     {
         db = this.getWritableDatabase();
@@ -142,6 +147,7 @@ public class DBHandler extends SQLiteOpenHelper
         System.out.println("UPDATED: " + count);
         return count;
     }
+    //deleted a row. Returns the amount of rows deleted
     public int delete (int pk)
     {
         db = this.getWritableDatabase();
@@ -152,9 +158,10 @@ public class DBHandler extends SQLiteOpenHelper
         System.out.println("DELETED: " + deleted);
         return deleted;
     }
-/*
+
+    //Deletes everything
     public void deleteAll ()
     {
         int deletedRows = db.delete(TABLE_TEAM_DETAIL, null, null);
-    }*/
+    }
 }

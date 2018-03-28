@@ -56,6 +56,7 @@ public class UpdateTeam extends AppCompatActivity {
         mvpText.setText(mvp);
         stadiumText.setText(stadium);
 
+        //Update button
         final Button update = (Button) findViewById(R.id.update);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +72,8 @@ public class UpdateTeam extends AppCompatActivity {
                 update(pk, t);
             }
         });
+
+        //Delete button
         final Button delete = (Button) findViewById(R.id.delete);
         delete.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view)
@@ -80,6 +83,7 @@ public class UpdateTeam extends AppCompatActivity {
         });
 
     }
+    //Deletes entry
     public void delete_row (int pk)
     {
         db.delete(pk);
@@ -87,6 +91,7 @@ public class UpdateTeam extends AppCompatActivity {
         Intent i = new Intent(UpdateTeam.this, MainActivity.class);
         startActivity(i);
     }
+    //updates entry
     public void update(int pk, Team t)
     {
         db.update(pk, t);

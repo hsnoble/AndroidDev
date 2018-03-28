@@ -22,6 +22,7 @@ public class Team
         mvp =  inMvp;
         stadium = place;
     }
+    //Default constructor
     public Team()
     {
         authorName = "";
