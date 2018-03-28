@@ -1,5 +1,6 @@
 package com.example.hsnoble.assignment3;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -70,10 +71,27 @@ public class UpdateTeam extends AppCompatActivity {
                 update(pk, t);
             }
         });
+        final Button delete = (Button) findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view)
+            {
+                delete_row(pk);
+            }
+        });
 
+    }
+    public void delete_row (int pk)
+    {
+        db.delete(pk);
+        //Open Main menu
+        Intent i = new Intent(UpdateTeam.this, MainActivity.class);
+        startActivity(i);
     }
     public void update(int pk, Team t)
     {
         db.update(pk, t);
+        //Open Main menu
+        Intent i = new Intent(UpdateTeam.this, MainActivity.class);
+        startActivity(i);
     }
 }

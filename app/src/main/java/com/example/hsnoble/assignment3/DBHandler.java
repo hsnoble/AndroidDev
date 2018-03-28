@@ -137,10 +137,20 @@ public class DBHandler extends SQLiteOpenHelper
 
         String sel = PK + "= ?";
         String[] arg = {Integer.toString(pk)};
-        //String where =
+
         int count = db.update(TABLE_TEAM_DETAIL, cv, sel, arg);
         System.out.println("UPDATED: " + count);
         return count;
+    }
+    public int delete (int pk)
+    {
+        db = this.getWritableDatabase();
+        String sel = PK + "= ?";
+        String[] arg = {Integer.toString(pk)};
+
+        int deleted = db.delete(TABLE_TEAM_DETAIL, sel, arg);
+        System.out.println("DELETED: " + deleted);
+        return deleted;
     }
 /*
     public void deleteAll ()
