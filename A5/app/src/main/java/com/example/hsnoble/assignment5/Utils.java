@@ -47,7 +47,7 @@ public class Utils {
 
         return url;
     }
-    private static String httpReq (URL url) throws IOException
+    private static String httpReq(URL url) throws IOException
     {
         String res ="";
         if(url==null)

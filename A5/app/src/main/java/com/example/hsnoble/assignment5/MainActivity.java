@@ -27,7 +27,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    String dataLink = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2018-01-01&endtime=2018-12-31&minmagnitude=6";
+    String dataLink = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2018-01-01&minmagnitude=6.0&limit=20";
     ListView earthquakeList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +37,15 @@ public class MainActivity extends AppCompatActivity {
         e.execute(dataLink);
     }
 
-    class EarthquakeAsync extends AsyncTask<String, Void, List<String>>
-    {
+    class EarthquakeAsync extends AsyncTask<String, Void, List<String>> {
         @Override
-        protected List<String> doInBackground(String... stringurl)
-        {
+        protected List<String> doInBackground(String... stringurl) {
             return Utils.fetchEarthquakeData(stringurl[0]);
         }
-        public void onPostExecute(List<String> postExecuteResult)
-        {
+
+        public void onPostExecute(List<String> postExecuteResult) {
             CustomListAdapter arrayAdapter = new CustomListAdapter (MainActivity.this, postExecuteResult);
-            earthquakeList= findViewById(R.id.data);
+            earthquakeList = findViewById(R.id.data);
             earthquakeList.setAdapter(arrayAdapter);
 
             earthquakeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -60,7 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+
         }
+
+
     }
 
 }
@@ -71,7 +72,7 @@ class CustomListAdapter extends ArrayAdapter<String>
 
     public CustomListAdapter (Activity activity, List<String> itemnameA)
     {
-        super(activity, R.layout.one_quake,itemnameA );
+        super(activity, R.layout.activity_earthquake_info,itemnameA );
         this.context=activity;
         this.itemname1=itemnameA;
     }
@@ -79,7 +80,7 @@ class CustomListAdapter extends ArrayAdapter<String>
     public View getView(int position, View view, ViewGroup parent)
     {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.one_quake,null,true);
+        View rowView = inflater.inflate(R.layout.activity_earthquake_info,null,true);
         String earthInfo[] = itemname1.get(position).split("@@");
         TextView textInfo = rowView.findViewById(R.id.nameID);
         textInfo.setText(earthInfo[0]);
